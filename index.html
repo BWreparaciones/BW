@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--========== CSS ==========-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <title>BW Reparaciones</title>
+    </head>
+    <body>
+
+        <!--========== SCROLL TOP ==========-->
+        <a href="#" class="scrolltop" id="scroll-top">
+            <i class='bx bx-chevron-up scrolltop__icon'></i>
+        </a>
+
+        <!--========== HEADER ==========-->
+        <header class="l-header" id="header">
+            <nav class="nav bd-container">
+                <a href="#" class="nav__logo">BW Reparaciones</a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#pedido" class="nav__link">Atencion Al Publico</a></li>
+                        <li class="nav__item"><a href="#menu" class="nav__link">Menu</a></li>     
+                        <li class="nav__item"><a href="#contacto" class="nav__link">Contacto</a></li>
+
+                        <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--========== HOME ==========-->
+            <section class="home" id="home">
+                <div class="home__container bd-container bd-grid">
+
+
+                    <img src="assets/img/Logo.png" alt="menu" class="home__img">
+                    <div class="home__data">
+                        <h1 class="home__title">BW Reparaciones</h1>
+                        <h2 class="home__subtitle">Reparaciones y Arreglos de celulares</h2>
+                        <a href="#pedido" class="button" style="font-size: 30px; padding: 15px 30px;">Hacer Consulta</a>
+
+                    </div>
+    
+
+
+                </div>
+            </section>
+
+            <!--========== CONSULTA ==========-->
+
+
+
+
+<!-- FORMULARIO MODIFICADO -->
+<form id="pedidoForm" class="menu__container1 bd-container">
+  <h1 class="menu-title" id="pedido">Hacer Consulta Online</h1>
+
+  <div id="pedido" class="menu__container1 bd-container">
+    <div>
+      <button type="button" id="boton-seleccionar-sistema" class="menu__name1 button" onclick="mostrarBotonesSistema()">Selecciona el tipo del teléfono</button>
+    </div>
+
+    <div id="botones-sistema" style="display: none; margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+      <button id="boton-android" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('android')">
+        <img src="assets/img/android.png" alt="Android" style="width: 48px; height: 48px;">
+      </button>
+      <button id="boton-iphone" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('iphone')">
+        <img src="assets/img/iphone.png" alt="iPhone" style="width: 48px; height: 48px;">
+      </button>
+    </div>
+
+    <!-- Android: Marca -->
+    <div id="lista-android" style="display: none; margin-top: 10px;">
+      <select id="selectMarcaAndroid" class="button button-add" style="width: 100%;" onchange="mostrarBotonModeloAndroid()">
+        <option disabled selected>Selecciona una marca</option>
+        <option value="samsung">Samsung</option>
+        <option value="motorola">Motorola</option>
+        <option value="xiaomi">Xiaomi</option>
+        <option value="otra">Otra</option>
+      </select>
+      <input type="text" id="inputOtraMarcaAndroid" placeholder="Especificá la marca" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+    </div>
+
+    <!-- Android: Modelo -->
+    <div id="modelos-android" style="display: none; margin-top: 10px;">
+      <select id="selectModeloAndroid" class="button button-add" style="width: 100%;" onchange="mostrarReparacionesAndroid()">
+        <option disabled selected>Selecciona un modelo</option>
+      </select>
+      <input type="text" id="inputOtroModeloAndroid" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+    </div>
+
+    <!-- iPhone -->
+    <div id="lista-iphone" style="display: none; margin-top: 10px;">
+      <select id="selectModeloIphone" class="button button-add" style="width: 100%;" onchange="mostrarReparacionesIphone()">
+        <option disabled selected>Selecciona un modelo</option>
+        <option>iPhone 8</option>
+        <option>iPhone 8 Plus</option>
+        <option>iPhone X</option>
+        <option>iPhone XR</option>
+        <option>iPhone 11</option>
+        <option>iPhone 11 Pro</option>
+        <option>iPhone 11 Pro Max</option>
+        <option>iPhone 12</option>
+        <option>iPhone 12 Pro</option>
+        <option>iPhone 12 Pro Max</option>
+        <option>iPhone 13</option>
+        <option>iPhone 13 Pro</option>
+        <option>iPhone 13 Pro Max</option>
+        <option>iPhone 14</option>
+        <option>iPhone 14 Pro</option>
+        <option>iPhone 14 Pro Max</option>
+        <option>Otro modelo</option>
+      </select>
+      <input type="text" id="inputOtroModeloIphone" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+    </div>
+
+    <!-- Reparaciones -->
+    <div id="reparaciones" style="display: none; margin-top: 10px;">
+      <select id="selectReparacion" class="button button-add" style="width: 100%;" onchange="mostrarCampoOtroProblema()">
+        <option disabled selected>Selecciona una reparación</option>
+        <option>Cambio de batería</option>
+        <option>Cambio de módulo</option>
+        <option>Desbloqueo</option>
+        <option>Reparación de micrófono</option>
+        <option>Reparación de parlante</option>
+        <option>Conector de carga</option>
+        <option>Reparación de cámara</option>
+        <option>Reinicio de software</option>
+        <option>Actualización de sistema</option>
+        <option>Otro problema</option>
+      </select>
+      <input type="text" id="inputOtroProblema" placeholder="Especificá el problema" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+    </div>
+
+    <!-- Botón WhatsApp -->
+    <div id="boton-whatsapp" style="display: none; margin-top: 20px; text-align: center;">
+      <button type="button" class="button button-add" style="flex: 1; padding: 10px;">
+        <img src="assets/img/whatsapp.png" alt="WhatsApp" style="width: 48px; height: 48px;">
+      </button>
+    </div>
+</form>
+
+<!-- SCRIPT MODIFICADO -->
+<script>
+  let plataformaSeleccionada = null;
+
+  function mostrarBotonesSistema() {
+    document.getElementById('botones-sistema').style.display = 'flex';
+  }
+
+  function ocultarTodo() {
+    document.getElementById('lista-android').style.display = 'none';
+    document.getElementById('modelos-android').style.display = 'none';
+    document.getElementById('lista-iphone').style.display = 'none';
+    document.getElementById('reparaciones').style.display = 'none';
+    document.getElementById('inputOtraMarcaAndroid').style.display = 'none';
+    document.getElementById('inputOtroModeloAndroid').style.display = 'none';
+    document.getElementById('inputOtroModeloIphone').style.display = 'none';
+    document.getElementById('inputOtroProblema').style.display = 'none';
+    document.getElementById('boton-whatsapp').style.display = 'none';
+
+    const selects = document.querySelectorAll('select');
+    selects.forEach(select => {
+      select.selectedIndex = 0;
+    });
+  }
+
+  function mostrarLista(tipo) {
+    if (!plataformaSeleccionada) {
+      plataformaSeleccionada = tipo;
+      if (tipo === 'iphone') {
+        document.getElementById('boton-android').style.display = 'none';
+      } else {
+        document.getElementById('boton-iphone').style.display = 'none';
+      }
+    }
+
+    ocultarTodo();
+
+    if (tipo === 'android') {
+      document.getElementById('lista-android').style.display = 'block';
+    } else if (tipo === 'iphone') {
+      document.getElementById('lista-iphone').style.display = 'block';
+    }
+  }
+
+  function mostrarBotonModeloAndroid() {
+    const marca = document.getElementById('selectMarcaAndroid').value;
+    const selectModelo = document.getElementById('selectModeloAndroid');
+    const inputOtraMarca = document.getElementById('inputOtraMarcaAndroid');
+    const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
+
+    selectModelo.innerHTML = '<option disabled selected>Selecciona un modelo</option>';
+    inputOtraMarca.style.display = 'none';
+    inputOtroModelo.style.display = 'none';
+
+    if (marca === 'otra') {
+      inputOtraMarca.style.display = 'block';
+      document.getElementById('modelos-android').style.display = 'block';
+      selectModelo.innerHTML += '<option>Otro modelo</option>';
+      return;
+    }
+
+    let modelos = [];
+    if (marca === 'samsung') {
+      modelos = ['Galaxy A10', 'Galaxy A20', 'Galaxy A50', 'Galaxy A71', 'Galaxy S10', 'Galaxy S20', 'Galaxy S21', 'Galaxy S22', 'Galaxy S23', 'Galaxy Note 10'];
+    } else if (marca === 'motorola') {
+      modelos = ['Moto G7', 'Moto G8', 'Moto G9', 'Moto G Power', 'Moto G Stylus', 'Moto G100', 'Moto E6', 'Moto E7', 'Edge', 'Edge Plus'];
+    } else if (marca === 'xiaomi') {
+      modelos = ['Redmi Note 8', 'Redmi Note 9', 'Redmi Note 10', 'Redmi Note 11', 'Redmi Note 12', 'Poco X3', 'Poco F3', 'Mi 9T', 'Mi 10', 'Mi 11'];
+    }
+
+    modelos.forEach(modelo => {
+      const option = document.createElement('option');
+      option.value = modelo;
+      option.textContent = modelo;
+      selectModelo.appendChild(option);
+    });
+
+    document.getElementById('modelos-android').style.display = 'block';
+  }
+
+  function mostrarReparacionesAndroid() {
+    const modelo = document.getElementById('selectModeloAndroid').value;
+    const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
+    if (modelo === 'Otro modelo') {
+      inputOtroModelo.style.display = 'block';
+    } else {
+      inputOtroModelo.style.display = 'none';
+    }
+    document.getElementById('reparaciones').style.display = 'block';
+  }
+
+  function mostrarReparacionesIphone() {
+    const modelo = document.getElementById('selectModeloIphone').value;
+    const inputOtroModelo = document.getElementById('inputOtroModeloIphone');
+    if (modelo === 'Otro modelo') {
+      inputOtroModelo.style.display = 'block';
+    } else {
+      inputOtroModelo.style.display = 'none';
+    }
+    document.getElementById('reparaciones').style.display = 'block';
+  }
+
+  function mostrarCampoOtroProblema() {
+    const reparacion = document.getElementById('selectReparacion').value;
+    const inputOtroProblema = document.getElementById('inputOtroProblema');
+    if (reparacion === 'Otro problema') {
+      inputOtroProblema.style.display = 'block';
+    } else {
+      inputOtroProblema.style.display = 'none';
+    }
+    document.getElementById('boton-whatsapp').style.display = 'block';
+  }
+
+  document.querySelector('#boton-whatsapp button').addEventListener('click', function () {
+    const phoneNumber = '5491135368084';
+
+    let plataforma = plataformaSeleccionada;
+    let marca = '';
+    let modelo = '';
+    let problema = '';
+
+    if (plataforma === 'android') {
+      const marcaVal = document.getElementById('selectMarcaAndroid').value;
+      if (marcaVal === 'otra') {
+        const otra = document.getElementById('inputOtraMarcaAndroid').value.trim();
+        if (!otra) {
+          alert('Por favor, especificá la marca.');
+          return;
+        }
+        marca = otra;
+      } else {
+        marca = marcaVal;
+      }
+
+      const modeloVal = document.getElementById('selectModeloAndroid').value;
+      if (modeloVal === 'Otro modelo') {
+        const otroModelo = document.getElementById('inputOtroModeloAndroid').value.trim();
+        if (!otroModelo) {
+          alert('Por favor, especificá el modelo.');
+          return;
+        }
+        modelo = otroModelo;
+      } else {
+        modelo = modeloVal;
+      }
+    }
+
+    if (plataforma === 'iphone') {
+      const modeloVal = document.getElementById('selectModeloIphone').value;
+      if (modeloVal === 'Otro modelo') {
+        const otroModelo = document.getElementById('inputOtroModeloIphone').value.trim();
+        if (!otroModelo) {
+          alert('Por favor, especificá el modelo.');
+          return;
+        }
+        modelo = otroModelo;
+      } else {
+        modelo = modeloVal;
+      }
+    }
+
+    const reparacionVal = document.getElementById('selectReparacion').value;
+    if (reparacionVal === 'Otro problema') {
+      const otroProblema = document.getElementById('inputOtroProblema').value.trim();
+      if (!otroProblema) {
+        alert('Por favor, especificá el problema.');
+        return;
+      }
+      problema = otroProblema;
+    } else {
+      problema = reparacionVal;
+    }
+
+    const mensaje = `Plataforma: ${plataforma}\nMarca/Modelo: ${marca ? marca + ' / ' : ''}${modelo}\nProblema: ${problema}\nSolución: A confirmar con técnico`;
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+    window.open(whatsappUrl, "_blank");
+  });
+</script>
+
+
+
+  
+              
+              
+                         
+              
+  
+  
+  
+  
+  
+  
+  
+  
+      
+      
+      
+  
+
+
+
+
+
+
+            
+            <!--========== CONTACT US ==========-->
+            <section class="contact section bd-container" id="contacto">
+                <div class="contact__container bd-grid">
+                    <div class="contact__data">
+                        <h2 class="section-title contact__initial">Direccion y Contacto</h2>
+                        <p class="contact__description">En esta parte se veria la direccion de negocio ejemplo: rivadavia 3340 y la informacion de contacto comotelefono o gmail</p>
+                    </div>
+
+                    <div class="contact__button">
+                        <a href="#" class="button">LLamar</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!--========== FOOTER ==========-->
+        <footer class="footer section bd-container">
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <a href="#" class="footer__logo">Nombre del restaurante</a>
+                    <span class="footer__description">Direccion</span>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Servicios</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Delivery</a></li>
+                        <li><a href="#" class="footer__link">Exelente calidad</a></li>
+                        <li><a href="#" class="footer__link">Comida rapida</a></li>
+                        <li><a href="#" class="footer__link">Atencion personalizada</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Informacion</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Direccion: Moreno 1235</a></li>
+                        <li><a href="#" class="footer__link">Numero: 1234456</a></li>
+                        <li><a href="#" class="footer__link">Gmail: 2323@gmail.com</a></li>
+                        <li><a href="#" class="footer__link">Instagram: leo.messi</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169; 2024 Todos los derechos resevados: nombre del restaurant</p>
+        </footer>
+
+        <!--========== SCROLL REVEAL ==========-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--========== MAIN JS ==========-->
+        <script src="assets/js/main.js"></script>
+    </body>
+</html>
