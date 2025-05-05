@@ -27,7 +27,7 @@
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                       <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
-                        <li class="nav__item"><a href="#pedido" class="nav__link">Atencion Al Publico</a></li>
+                        <li class="nav__item"><a href="#pedi" class="nav__link">Atencion Al Publico</a></li>
                         <li class="nav__item"><a href="#contacto" class="nav__link">Contacto</a></li>
 
                         <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
@@ -72,23 +72,30 @@
 
 
 <!-- FORMULARIO MODIFICADO -->
-<h1 class="menu-title" id="pedido">Hacer Consulta Online</h1>
+<h1 class="menu-title" id="pedido">Consulta Online</h1>
 <form id="pedidoForm" class="menu__container1 bd-container">
 
 
-  <div id="pedido" class="menu__container1 bd-container">
+  <div class="menu__container1 bd-container">
     <div>
-      <button type="button" id="boton-seleccionar-sistema" class="menu__name1 button" onclick="mostrarBotonesSistema()">Selecciona el tipo del teléfono</button>
+      <button type="button" id="boton-seleccionar-sistema" class="menu__name1 button" onclick="mostrarBotonesSistema()">Haga click para empezar consulta online</button>
     </div>
 
-    <div id="botones-sistema" style="display: none; margin-top: 10px; display: flex; gap: 10px; align-items: center;">
-      <button id="boton-android" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('android')">
-        <img src="assets/img/android.png" alt="Android" style="width: 48px; height: 48px;">
-      </button>
-      <button id="boton-iphone" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('iphone')">
-        <img src="assets/img/iphone.png" alt="iPhone" style="width: 48px; height: 48px;">
-      </button>
+    <div id="contenedor-sistemas" style="display: none; margin-top: 10px;">
+      <div>
+        <button type="button" class="menu__name1 button" disabled style="cursor: default;">Elija la plataforma del dispositivo</button>
+      </div>
+      <div id="botones-sistema" style="margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+        <button type="button" id="boton-android" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('android')">
+          <img src="assets/img/android.png" alt="Android" style="width: 48px; height: 48px;">
+        </button>
+        <button type="button" id="boton-iphone" class="button button-add" style="flex: 1; padding: 10px;" onclick="mostrarLista('iphone')">
+          <img src="assets/img/iphone.png" alt="iPhone" style="width: 48px; height: 48px;">
+        </button>
+      </div>
     </div>
+    
+    
 
     <!-- Android: Marca -->
     <div id="lista-android" style="display: none; margin-top: 10px;">
@@ -166,8 +173,11 @@
   let plataformaSeleccionada = null;
 
   function mostrarBotonesSistema() {
-    document.getElementById('botones-sistema').style.display = 'flex';
-  }
+  document.getElementById('boton-seleccionar-sistema').style.display = 'none';
+  document.getElementById('contenedor-sistemas').style.display = 'block';
+}
+
+
 
   function ocultarTodo() {
     document.getElementById('lista-android').style.display = 'none';
