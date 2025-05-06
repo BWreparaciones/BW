@@ -26,8 +26,8 @@
 
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
-                      <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
-                        <li class="nav__item"><a href="#pedi" class="nav__link">Atencion Al Publico</a></li>
+                      <li class="nav__item"><a href="#Inicio" class="nav__link">Inicio</a></li>
+                        <li class="nav__item"><a href="#Consulta" class="nav__link">Atencion Al Publico</a></li>
                         <li class="nav__item"><a href="#contacto" class="nav__link">Contacto</a></li>
 
                         <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
@@ -42,7 +42,7 @@
 
         <main class="l-main">
             <!--========== HOME ==========-->
-            <section class="home" id="home">
+            <section class="home" id="Inicio">
                 <div class="home__container bd-container bd-grid">
 
 
@@ -50,7 +50,7 @@
                     <div class="home__data">
                         <h1 class="home__title">BW Reparaciones</h1>
                         <h2 class="home__subtitle">Reparaciones y Arreglos de celulares</h2>
-                        <a href="#pedido" class="button" style="font-size: 30px; padding: 15px 30px;">Hacer Consulta</a>
+                        <a href="#Consulta" class="button" style="font-size: 30px; padding: 15px 30px;">Hacer Consulta</a>
 
                     </div>
     
@@ -72,9 +72,8 @@
 
 
 <!-- FORMULARIO MODIFICADO -->
-<h1 class="menu-title" id="pedido">Consulta Online</h1>
+<h1 class="menu-title" id="Consulta">Consulta Online</h1>
 <form id="pedidoForm" class="menu__container1 bd-container">
-
 
   <div class="menu__container1 bd-container">
     <div>
@@ -94,10 +93,7 @@
         </button>
       </div>
     </div>
-    
-    
 
-    <!-- Android: Marca -->
     <div id="lista-android" style="display: none; margin-top: 10px;">
       <select id="selectMarcaAndroid" class="button button-add" style="width: 100%;" onchange="mostrarBotonModeloAndroid()">
         <option disabled selected>Selecciona una marca</option>
@@ -106,18 +102,16 @@
         <option value="xiaomi">Xiaomi</option>
         <option value="otra">Otra</option>
       </select>
-      <input type="text" id="inputOtraMarcaAndroid" placeholder="Especificá la marca" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+      <input type="text" id="inputOtraMarcaAndroid" placeholder="Especificá la marca" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" maxlength="25" minlength="1">
     </div>
 
-    <!-- Android: Modelo -->
     <div id="modelos-android" style="display: none; margin-top: 10px;">
       <select id="selectModeloAndroid" class="button button-add" style="width: 100%;" onchange="mostrarReparacionesAndroid()">
         <option disabled selected>Selecciona un modelo</option>
       </select>
-      <input type="text" id="inputOtroModeloAndroid" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+      <input type="text" id="inputOtroModeloAndroid" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" maxlength="25" minlength="1">
     </div>
 
-    <!-- iPhone -->
     <div id="lista-iphone" style="display: none; margin-top: 10px;">
       <select id="selectModeloIphone" class="button button-add" style="width: 100%;" onchange="mostrarReparacionesIphone()">
         <option disabled selected>Selecciona un modelo</option>
@@ -139,10 +133,9 @@
         <option>iPhone 14 Pro Max</option>
         <option>Otro modelo</option>
       </select>
-      <input type="text" id="inputOtroModeloIphone" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+      <input type="text" id="inputOtroModeloIphone" placeholder="Especificá el modelo" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" maxlength="25" minlength="1">
     </div>
 
-    <!-- Reparaciones -->
     <div id="reparaciones" style="display: none; margin-top: 10px;">
       <select id="selectReparacion" class="button button-add" style="width: 100%;" onchange="mostrarCampoOtroProblema()">
         <option disabled selected>Selecciona una reparación</option>
@@ -157,10 +150,11 @@
         <option>Actualización de sistema</option>
         <option>Otro problema</option>
       </select>
-      <input type="text" id="inputOtroProblema" placeholder="Especificá el problema" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" oninput="validarEntrada()">
+      <input type="text" id="inputOtroProblema" placeholder="Especificá el problema" class="button button-add" style="width: 100%; margin-top: 10px; display: none;" maxlength="250" minlength="5">
     </div>
 
-    <!-- Botón WhatsApp -->
+    <div id="mensaje-error" class="mensaje-error" style="display: none;">Faltan campos por rellenar correctamente.</div>
+
     <div id="boton-whatsapp" style="display: none; margin-top: 20px; text-align: center;">
       <button type="button" class="button button-add" style="flex: 1; padding: 10px;">
         <img src="assets/img/whatsapp.png" alt="WhatsApp" style="width: 48px; height: 48px;">
@@ -170,190 +164,165 @@
 
 <!-- SCRIPT MODIFICADO -->
 <script>
-  let plataformaSeleccionada = null;
+let plataformaSeleccionada = null;
 
-  function mostrarBotonesSistema() {
+function mostrarBotonesSistema() {
   document.getElementById('boton-seleccionar-sistema').style.display = 'none';
   document.getElementById('contenedor-sistemas').style.display = 'block';
 }
 
+function ocultarTodo() {
+  document.getElementById('lista-android').style.display = 'none';
+  document.getElementById('modelos-android').style.display = 'none';
+  document.getElementById('lista-iphone').style.display = 'none';
+  document.getElementById('reparaciones').style.display = 'none';
+  document.getElementById('inputOtraMarcaAndroid').style.display = 'none';
+  document.getElementById('inputOtroModeloAndroid').style.display = 'none';
+  document.getElementById('inputOtroModeloIphone').style.display = 'none';
+  document.getElementById('inputOtroProblema').style.display = 'none';
+  document.getElementById('boton-whatsapp').style.display = 'none';
+  document.getElementById('mensaje-error').style.display = 'none';
+  const selects = document.querySelectorAll('select');
+  selects.forEach(select => select.selectedIndex = 0);
+}
 
-
-  function ocultarTodo() {
-    document.getElementById('lista-android').style.display = 'none';
-    document.getElementById('modelos-android').style.display = 'none';
-    document.getElementById('lista-iphone').style.display = 'none';
-    document.getElementById('reparaciones').style.display = 'none';
-    document.getElementById('inputOtraMarcaAndroid').style.display = 'none';
-    document.getElementById('inputOtroModeloAndroid').style.display = 'none';
-    document.getElementById('inputOtroModeloIphone').style.display = 'none';
-    document.getElementById('inputOtroProblema').style.display = 'none';
-    document.getElementById('boton-whatsapp').style.display = 'none';
-
-    const selects = document.querySelectorAll('select');
-    selects.forEach(select => {
-      select.selectedIndex = 0;
-    });
-  }
-
-  function mostrarLista(tipo) {
-    if (!plataformaSeleccionada) {
-      plataformaSeleccionada = tipo;
-      if (tipo === 'iphone') {
-        document.getElementById('boton-android').style.display = 'none';
-      } else {
-        document.getElementById('boton-iphone').style.display = 'none';
-      }
-    }
-
-    ocultarTodo();
-
-    if (tipo === 'android') {
-      document.getElementById('lista-android').style.display = 'block';
-    } else if (tipo === 'iphone') {
-      document.getElementById('lista-iphone').style.display = 'block';
-    }
-  }
-
-  function mostrarBotonModeloAndroid() {
-    const marca = document.getElementById('selectMarcaAndroid').value;
-    const selectModelo = document.getElementById('selectModeloAndroid');
-    const inputOtraMarca = document.getElementById('inputOtraMarcaAndroid');
-    const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
-
-    selectModelo.innerHTML = '<option disabled selected>Selecciona un modelo</option>';
-    inputOtraMarca.style.display = 'none';
-    inputOtroModelo.style.display = 'none';
-
-    if (marca === 'otra') {
-      inputOtraMarca.style.display = 'block';
-      document.getElementById('modelos-android').style.display = 'block';
-      selectModelo.innerHTML += '<option>Otro modelo</option>';
-      return;
-    }
-
-    let modelos = [];
-    if (marca === 'samsung') {
-      modelos = ['Galaxy A10', 'Galaxy A20', 'Galaxy A50', 'Galaxy A71', 'Galaxy S10', 'Galaxy S20', 'Galaxy S21', 'Galaxy S22', 'Galaxy S23', 'Galaxy Note 10'];
-    } else if (marca === 'motorola') {
-      modelos = ['Moto G7', 'Moto G8', 'Moto G9', 'Moto G Power', 'Moto G Stylus', 'Moto G100', 'Moto E6', 'Moto E7', 'Edge', 'Edge Plus'];
-    } else if (marca === 'xiaomi') {
-      modelos = ['Redmi Note 8', 'Redmi Note 9', 'Redmi Note 10', 'Redmi Note 11', 'Redmi Note 12', 'Poco X3', 'Poco F3', 'Mi 9T', 'Mi 10', 'Mi 11'];
-    }
-
-    modelos.forEach(modelo => {
-      const option = document.createElement('option');
-      option.value = modelo;
-      option.textContent = modelo;
-      selectModelo.appendChild(option);
-    });
-
-    document.getElementById('modelos-android').style.display = 'block';
-  }
-
-  function mostrarReparacionesAndroid() {
-    const modelo = document.getElementById('selectModeloAndroid').value;
-    const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
-    if (modelo === 'Otro modelo') {
-      inputOtroModelo.style.display = 'block';
+function mostrarLista(tipo) {
+  if (!plataformaSeleccionada) {
+    plataformaSeleccionada = tipo;
+    if (tipo === 'iphone') {
+      document.getElementById('boton-android').style.display = 'none';
     } else {
-      inputOtroModelo.style.display = 'none';
+      document.getElementById('boton-iphone').style.display = 'none';
     }
-    document.getElementById('reparaciones').style.display = 'block';
   }
-
-  function mostrarReparacionesIphone() {
-    const modelo = document.getElementById('selectModeloIphone').value;
-    const inputOtroModelo = document.getElementById('inputOtroModeloIphone');
-    if (modelo === 'Otro modelo') {
-      inputOtroModelo.style.display = 'block';
-    } else {
-      inputOtroModelo.style.display = 'none';
-    }
-    document.getElementById('reparaciones').style.display = 'block';
+  ocultarTodo();
+  if (tipo === 'android') {
+    document.getElementById('lista-android').style.display = 'block';
+  } else {
+    document.getElementById('lista-iphone').style.display = 'block';
   }
+}
 
-  function mostrarCampoOtroProblema() {
-    const reparacion = document.getElementById('selectReparacion').value;
-    const inputOtroProblema = document.getElementById('inputOtroProblema');
-    if (reparacion === 'Otro problema') {
-      inputOtroProblema.style.display = 'block';
-    } else {
-      inputOtroProblema.style.display = 'none';
-    }
-    document.getElementById('boton-whatsapp').style.display = 'block';
-  }
+function mostrarBotonModeloAndroid() {
+  const marca = document.getElementById('selectMarcaAndroid').value;
+  const selectModelo = document.getElementById('selectModeloAndroid');
+  const inputOtraMarca = document.getElementById('inputOtraMarcaAndroid');
+  const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
 
-  document.querySelector('#boton-whatsapp button').addEventListener('click', function () {
-    const phoneNumber = '5491135368084';
+  selectModelo.innerHTML = '<option disabled selected>Selecciona un modelo</option>';
+  inputOtraMarca.style.display = 'none';
+  inputOtroModelo.style.display = 'none';
 
-    let plataforma = plataformaSeleccionada;
-    let marca = '';
-    let modelo = '';
-    let problema = '';
+  let modelos = [];
+  if (marca === 'samsung') modelos = ['Galaxy A10', 'Galaxy A20', 'Galaxy A50', 'Galaxy A71'];
+  if (marca === 'motorola') modelos = ['Moto G7', 'Moto G8', 'Moto G9'];
+  if (marca === 'xiaomi') modelos = ['Redmi Note 8', 'Redmi Note 9', 'Redmi Note 10'];
+  if (marca === 'otra') inputOtraMarca.style.display = 'block';
 
-    if (plataforma === 'android') {
-      const marcaVal = document.getElementById('selectMarcaAndroid').value;
-      if (marcaVal === 'otra') {
-        const otra = document.getElementById('inputOtraMarcaAndroid').value.trim();
-        if (!otra) {
-          alert('Por favor, especificá la marca.');
-          return;
-        }
-        marca = otra;
-      } else {
-        marca = marcaVal;
-      }
-
-      const modeloVal = document.getElementById('selectModeloAndroid').value;
-      if (modeloVal === 'Otro modelo') {
-        const otroModelo = document.getElementById('inputOtroModeloAndroid').value.trim();
-        if (!otroModelo) {
-          alert('Por favor, especificá el modelo.');
-          return;
-        }
-        modelo = otroModelo;
-      } else {
-        modelo = modeloVal;
-      }
-    }
-
-    if (plataforma === 'iphone') {
-      const modeloVal = document.getElementById('selectModeloIphone').value;
-      if (modeloVal === 'Otro modelo') {
-        const otroModelo = document.getElementById('inputOtroModeloIphone').value.trim();
-        if (!otroModelo) {
-          alert('Por favor, especificá el modelo.');
-          return;
-        }
-        modelo = otroModelo;
-      } else {
-        modelo = modeloVal;
-      }
-    }
-
-    const reparacionVal = document.getElementById('selectReparacion').value;
-    if (reparacionVal === 'Otro problema') {
-      const otroProblema = document.getElementById('inputOtroProblema').value.trim();
-      if (!otroProblema) {
-        alert('Por favor, especificá el problema.');
-        return;
-      }
-      problema = otroProblema;
-    } else {
-      problema = reparacionVal;
-    }
-
-    const mensaje = `Plataforma: ${plataforma}\nMarca/Modelo: ${marca ? marca + ' / ' : ''}${modelo}\nProblema: ${problema}\nSolución: A confirmar con técnico`;
-
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`;
-    window.open(whatsappUrl, "_blank");
+  modelos.forEach(modelo => {
+    const option = document.createElement('option');
+    option.value = modelo;
+    option.textContent = modelo;
+    selectModelo.appendChild(option);
   });
+
+  selectModelo.innerHTML += '<option>Otro modelo</option>';
+  document.getElementById('modelos-android').style.display = 'block';
+}
+
+function mostrarReparacionesAndroid() {
+  const modelo = document.getElementById('selectModeloAndroid').value;
+  const inputOtroModelo = document.getElementById('inputOtroModeloAndroid');
+  inputOtroModelo.style.display = (modelo === 'Otro modelo') ? 'block' : 'none';
+  document.getElementById('reparaciones').style.display = 'block';
+}
+
+function mostrarReparacionesIphone() {
+  const modelo = document.getElementById('selectModeloIphone').value;
+  const inputOtroModelo = document.getElementById('inputOtroModeloIphone');
+  inputOtroModelo.style.display = (modelo === 'Otro modelo') ? 'block' : 'none';
+  document.getElementById('reparaciones').style.display = 'block';
+}
+
+function mostrarCampoOtroProblema() {
+  const reparacion = document.getElementById('selectReparacion').value;
+  const inputOtroProblema = document.getElementById('inputOtroProblema');
+  inputOtroProblema.style.display = (reparacion === 'Otro problema') ? 'block' : 'none';
+  document.getElementById('boton-whatsapp').style.display = 'block';
+}
+
+function mostrarMensajeError() {
+  const errorBox = document.getElementById('mensaje-error');
+  errorBox.style.display = 'block';
+  setTimeout(() => errorBox.style.display = 'none', 4000);
+}
+
+document.querySelector('#boton-whatsapp button').addEventListener('click', function () {
+  const phoneNumber = '542215062076';
+
+  let plataforma = plataformaSeleccionada;
+  let marca = '';
+  let modelo = '';
+  let problema = '';
+
+  if (plataforma === 'android') {
+    const marcaVal = document.getElementById('selectMarcaAndroid').value;
+    if (marcaVal === 'otra') {
+      const otra = document.getElementById('inputOtraMarcaAndroid').value.trim();
+      if (otra.length < 1 || otra.length > 25) return mostrarMensajeError();
+      marca = otra;
+    } else {
+      marca = marcaVal;
+    }
+
+    const modeloVal = document.getElementById('selectModeloAndroid').value;
+    if (modeloVal === 'Otro modelo') {
+      const otroModelo = document.getElementById('inputOtroModeloAndroid').value.trim();
+      if (otroModelo.length < 1 || otroModelo.length > 25) return mostrarMensajeError();
+      modelo = otroModelo;
+    } else {
+      modelo = modeloVal;
+    }
+  }
+
+  if (plataforma === 'iphone') {
+    const modeloVal = document.getElementById('selectModeloIphone').value;
+    if (modeloVal === 'Otro modelo') {
+      const otroModelo = document.getElementById('inputOtroModeloIphone').value.trim();
+      if (otroModelo.length < 1 || otroModelo.length > 25) return mostrarMensajeError();
+      modelo = otroModelo;
+    } else {
+      modelo = modeloVal;
+    }
+  }
+
+  const reparacionVal = document.getElementById('selectReparacion').value;
+  if (reparacionVal === 'Otro problema') {
+    const otroProblema = document.getElementById('inputOtroProblema').value.trim();
+    if (otroProblema.length < 5 || otroProblema.length > 250) return mostrarMensajeError();
+    problema = otroProblema;
+  } else {
+    problema = reparacionVal;
+  }
+
+  const mensaje = `Plataforma: ${plataforma}\nMarca/Modelo: ${marca ? marca + ' / ' : ''}${modelo}\nProblema: ${problema}\nSolución: A confirmar con técnico`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`;
+  window.open(whatsappUrl, "_blank");
+});
 </script>
 
 
 
+
+
   
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
               
               
                          
@@ -381,12 +350,11 @@
             <section class="contact section bd-container" id="contacto">
                 <div class="contact__container bd-grid">
                     <div class="contact__data">
-                        <h2 class="section-title contact__initial">Direccion y Contacto</h2>
-                        <p class="contact__description">En esta parte se veria la direccion de negocio ejemplo: rivadavia 3340 y la informacion de contacto comotelefono o gmail</p>
+                        <h2 class="section-title contact__initial">Direccion: Rivadavia 2486 <br> Telefono: 2345459941</h2>
                     </div>
 
                     <div class="contact__button">
-                        <a href="#" class="button">LLamar</a>
+                      <a href="tel:2345459941" class="button">LLamar</a>
                     </div>
                 </div>
             </section>
@@ -396,32 +364,23 @@
         <footer class="footer section bd-container">
             <div class="footer__container bd-grid">
                 <div class="footer__content">
-                    <a href="#" class="footer__logo">Nombre del restaurante</a>
-                    <span class="footer__description">Direccion</span>
-                </div>
-
-                <div class="footer__content">
-                    <h3 class="footer__title">Servicios</h3>
-                    <ul>
-                        <li><a href="#" class="footer__link">Delivery</a></li>
-                        <li><a href="#" class="footer__link">Exelente calidad</a></li>
-                        <li><a href="#" class="footer__link">Comida rapida</a></li>
-                        <li><a href="#" class="footer__link">Atencion personalizada</a></li>
-                    </ul>
+                    <a href="#" class="footer__logo">BW Reparaciones</a>
+                    <span class="footer__description">Service y Reparaciones de celulares</span>
+                    <span class="footer__description">Service y Reparaciones de pc</span>
+                    <span class="footer__description">Service y Reparaciones de tablets</span>
                 </div>
 
                 <div class="footer__content">
                     <h3 class="footer__title">Informacion</h3>
                     <ul>
-                        <li><a href="#" class="footer__link">Direccion: Moreno 1235</a></li>
-                        <li><a href="#" class="footer__link">Numero: 1234456</a></li>
-                        <li><a href="#" class="footer__link">Gmail: 2323@gmail.com</a></li>
-                        <li><a href="#" class="footer__link">Instagram: leo.messi</a></li>
+                        <li><a href="#" class="footer__link">Direccion: Rivadavia 2486</a></li>
+                        <li><a href="#" class="footer__link">Numero: 2345459941</a></li>
+                        <li><a href="#" class="footer__link">Instagram: bwreparaciones</a></li>
                     </ul>
                 </div>
             </div>
 
-            <p class="footer__copy">&#169; 2024 Todos los derechos resevados: nombre del restaurant</p>
+            <p class="footer__copy">&#169; 2025 Todos los derechos resevados: BW Reparaciones</p>
         </footer>
 
         <!--========== SCROLL REVEAL ==========-->
